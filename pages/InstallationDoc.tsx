@@ -1,9 +1,13 @@
 
-import React from 'react';
-import { Terminal, Package, Palette, Wand2, Clipboard, CheckCircle2, ChevronRight, Zap, Code, AlertTriangle, Info, AlertCircle, Layers, Paintbrush } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Terminal, Package, Palette, Wand2, Clipboard, CheckCircle2, ChevronRight, Zap, Code, Code2, AlertTriangle, Info, AlertCircle, Layers, Paintbrush } from 'lucide-react';
 import { Card, Button, Badge, Alert, Accordion, Kbd } from '../components/MaguitoUI';
 
 const InstallationDoc: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Installation Guide — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   const [copied, setCopied] = React.useState<string | null>(null);
 
   const copyToClipboard = (text: string, id: string) => {
@@ -357,7 +361,7 @@ export default function MagicApp() {
                 <p className="font-bold text-gray-700 leading-relaxed">
                   Verificá que el <strong>content</strong> de tu <code className="bg-white px-1.5 py-0.5 rounded font-mono text-xs">tailwind.config.js</code> incluya la ruta a maguitoui:
                 </p>
-                <code className="block p-3 bg-maguito-black text-maguito-orange rounded-maguito-md font-mono text-xs">content: ["./node_modules/maguitoui/**/*.{js,ts,jsx,tsx}"]</code>
+                <code className="block p-3 bg-maguito-black text-maguito-orange rounded-maguito-md font-mono text-xs">{"content: [\"./node_modules/maguitoui/**/*.{js,ts,jsx,tsx}\"]"}</code>
               </div>
             </div>
           </Card>

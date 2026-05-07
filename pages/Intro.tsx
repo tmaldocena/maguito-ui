@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Card, Badge, Alert } from '../components/MaguitoUI';
-import { Sparkles, Zap, Palette, Code2, Package, ArrowRight, BookOpen, Terminal, Layers, Heart, ShieldCheck, Github } from 'lucide-react';
+import { Sparkles, Zap, Palette, Code2, Package, ArrowRight, BookOpen, Terminal, Layers, Heart, ShieldCheck } from 'lucide-react';
 
-interface IntroProps {
-  onNavigate: (path: string) => void;
-}
-
-const Intro: React.FC<IntroProps> = ({ onNavigate }) => {
+const Intro: React.FC = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    document.title = 'Introduction — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   return (
     <div className="space-y-16 md:space-y-24">
       {/* HERO DE INTRO */}
@@ -24,10 +26,10 @@ const Intro: React.FC<IntroProps> = ({ onNavigate }) => {
           Una librería de componentes React con estética Neo-Brutalista y toques orgánicos, diseñada para que tus proyectos tengan personalidad propia.
         </p>
         <div className="flex flex-col sm:flex-row items-center gap-4 justify-center pt-4">
-          <Button size="lg" onClick={() => onNavigate('installation')} className="h-16 px-10 text-xl">
-            Instalar Ahora <ArrowRight className="ml-2" size={20} />
+          <Button size="lg" onClick={() => navigate('/installation')} className="h-16 px-10 text-xl">
+            Instalar Ahora
           </Button>
-          <Button size="lg" variant="outline" onClick={() => onNavigate('buttons')} className="h-16 px-10 text-xl">
+          <Button size="lg" variant="outline" onClick={() => navigate('/components/buttons')} className="h-16 px-10 text-xl">
             Ver Componentes
           </Button>
         </div>
@@ -169,7 +171,7 @@ const Intro: React.FC<IntroProps> = ({ onNavigate }) => {
         </div>
 
         <div className="flex justify-center pt-4">
-          <Button size="lg" variant="primary" onClick={() => onNavigate('installation')} className="h-14 px-8 text-lg">
+          <Button size="lg" variant="primary" onClick={() => navigate('/installation')} className="h-14 px-8 text-lg">
             Ver Guía Completa de Instalación <BookOpen className="ml-2" size={18} />
           </Button>
         </div>
@@ -201,10 +203,10 @@ const Intro: React.FC<IntroProps> = ({ onNavigate }) => {
             Explorá los 66 componentes, personalizá temas y empezá a construir interfaces con personalidad.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center pt-4">
-            <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg bg-maguito-yellow hover:bg-[#ffe180]" onClick={() => onNavigate('buttons')}>
+            <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg bg-maguito-yellow hover:bg-[#ffe180]" onClick={() => navigate('/components/buttons')}>
               Explorar Componentes
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-lg text-maguito-white border-maguito-white hover:bg-maguito-white hover:text-maguito-black" onClick={() => onNavigate('themes')}>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-lg text-maguito-white border-maguito-white hover:bg-maguito-white hover:text-maguito-black" onClick={() => navigate('/themes')}>
               Temas y Colores
             </Button>
           </div>

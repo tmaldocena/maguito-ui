@@ -1,20 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Intro from './pages/Intro';
 import { ButtonsDoc, CardsDoc, InputsDoc, FeedbackDoc, ActionsDoc, NavigationDoc, AlertsDoc, LayoutDoc, ContentDoc, InteractiveDoc } from './pages/ComponentsDoc';
-import ThemesDoc, { THEMES, ThemePreset } from './pages/ThemesDoc';
+import ThemesDoc, { THEMES } from './pages/ThemesDoc';
 import InstallationDoc from './pages/InstallationDoc';
-import PublishingDoc from './pages/PublishingDoc';
 
 export type BorderStyle = 'bubbly' | 'sharp';
 export type FontStyle = 'branding' | 'serif' | 'mono' | 'jakarta';
 
-const App: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState('home');
-  
-  const [activeTheme, setActiveTheme] = useState<ThemePreset>(() => {
+const AppContent: React.FC = () => {
+  const [activeTheme, setActiveTheme] = useState(() => {
     const saved = localStorage.getItem('maguito-theme');
     if (saved) return THEMES.find(t => t.id === saved) || THEMES[0];
     return THEMES[0];
@@ -48,7 +46,6 @@ const App: React.FC = () => {
     root.style.setProperty('--maguito-text', activeTheme.text || '#2C2C2C');
     root.style.setProperty('--maguito-accent', activeTheme.accent || '#FDCB63');
     
-    // Muted text: more visible on dark backgrounds
     const isDark = activeTheme.bg && activeTheme.bg.startsWith('#0') || activeTheme.bg?.startsWith('#1');
     root.style.setProperty('--maguito-muted', isDark ? '#9CA3AF' : '#6B7280');
     
@@ -85,13 +82,15 @@ const App: React.FC = () => {
     localStorage.setItem('maguito-grain', useGrain.toString());
   }, [activeTheme, borderStyle, strokeWeight, shadowDepth, fontStyle, useGrain]);
 
-  const renderContent = () => {
-    switch (currentPath) {
-      case 'home': return <Home onNavigate={setCurrentPath} />;
-      case 'intro': return <Intro onNavigate={setCurrentPath} />;
-      case 'installation': return <InstallationDoc />;
-      case 'publishing': return <PublishingDoc />;
-      case 'themes': return (
+  return (
+    <Layout 
+      currentTheme={activeTheme} onThemeChange={setActiveTheme}
+    >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/intro" element={<Intro />} />
+        <Route path="/installation" element={<InstallationDoc />} />
+        <Route path="/themes" element={
           <ThemesDoc 
             currentTheme={activeTheme} onThemeChange={setActiveTheme} 
             borderStyle={borderStyle} onBorderStyleChange={setBorderStyle}
@@ -100,29 +99,27 @@ const App: React.FC = () => {
             fontStyle={fontStyle} onFontChange={setFontStyle}
             useGrain={useGrain} onGrainChange={setUseGrain}
           />
-      );
-      case 'buttons': return <ButtonsDoc />;
-      case 'cards': return <CardsDoc />;
-      case 'inputs': return <InputsDoc />;
-      case 'actions': return <ActionsDoc />;
-      case 'navigation': return <NavigationDoc />;
-      case 'feedback': return <FeedbackDoc />;
-      case 'alerts': return <AlertsDoc />;
-      case 'layout': return <LayoutDoc />;
-      case 'content': return <ContentDoc />;
-      case 'interactive': return <InteractiveDoc />;
-      default: return <Home onNavigate={setCurrentPath} />;
-    }
-  };
-
-  return (
-    <Layout 
-      activePath={currentPath} onNavigate={setCurrentPath}
-      currentTheme={activeTheme} onThemeChange={setActiveTheme}
-    >
-      {renderContent()}
+        } />
+        <Route path="/components/buttons" element={<ButtonsDoc />} />
+        <Route path="/components/inputs" element={<InputsDoc />} />
+        <Route path="/components/actions" element={<ActionsDoc />} />
+        <Route path="/components/navigation" element={<NavigationDoc />} />
+        <Route path="/components/cards" element={<CardsDoc />} />
+        <Route path="/components/feedback" element={<FeedbackDoc />} />
+        <Route path="/components/alerts" element={<AlertsDoc />} />
+        <Route path="/components/layout" element={<LayoutDoc />} />
+        <Route path="/components/content" element={<ContentDoc />} />
+        <Route path="/components/interactive" element={<InteractiveDoc />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </Layout>
   );
 };
+
+const App: React.FC = () => (
+  <BrowserRouter>
+    <AppContent />
+  </BrowserRouter>
+);
 
 export default App;

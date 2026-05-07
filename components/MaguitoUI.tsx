@@ -616,14 +616,32 @@ export const Kbd: React.FC<{ keys: string[]; label?: string; className?: string 
 
 // Join (group buttons/inputs)
 export const Join: React.FC<{ children: React.ReactNode; className?: string; orientation?: 'horizontal' | 'vertical' }> = ({ children, className, orientation = 'horizontal' }) => (
-  <div className={cn("flex", orientation === 'vertical' ? 'flex-col' : 'flex-row', className)}>
+  <div className={cn("flex items-stretch", orientation === 'vertical' ? 'flex-col' : 'flex-row', className)}>
     {React.Children.map(children, (child, i) => {
       if (!React.isValidElement(child)) return child;
+      const total = React.Children.count(children);
+      const isMiddle = i > 0 && i < total - 1;
+      const isFirst = i === 0;
+      const isLast = i === total - 1;
       return React.cloneElement(child as any, {
         className: cn(
           (child as any).props.className,
-          orientation === 'horizontal' ? 'rounded-none first:rounded-l-maguito-md last:rounded-r-maguito-md' : 'rounded-none first:rounded-t-maguito-md last:rounded-b-maguito-md',
-          'border-maguito border-maguito-black'
+          orientation === 'horizontal'
+            ? cn(
+                isFirst ? 'rounded-l-maguito-md rounded-r-none' : '',
+                isLast ? 'rounded-r-maguito-md rounded-l-none' : '',
+                isMiddle ? 'rounded-none' : '',
+                !isFirst ? 'border-l-0' : '',
+                '!flex items-center',
+              )
+            : cn(
+                isFirst ? 'rounded-t-maguito-md rounded-b-none' : '',
+                isLast ? 'rounded-b-maguito-md rounded-t-none' : '',
+                isMiddle ? 'rounded-none' : '',
+                !isFirst ? 'border-t-0' : '',
+                '!flex items-center justify-center',
+              ),
+          'border-maguito border-maguito-black flex-1'
         )
       });
     })}
@@ -644,6 +662,7 @@ export const Status: React.FC<{ status: 'online' | 'offline' | 'busy' | 'away'; 
 // Countdown
 export const Countdown: React.FC<{ seconds: number; onComplete?: () => void; className?: string }> = ({ seconds, onComplete, className }) => {
   const [count, setCount] = useState(seconds);
+  useEffect(() => { setCount(seconds); }, [seconds]);
   useEffect(() => {
     if (count <= 0) { onComplete?.(); return; }
     const timer = setTimeout(() => setCount(count - 1), 1000);

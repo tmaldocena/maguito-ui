@@ -1,150 +1,103 @@
-# MaguitoUI ✨
+# MaguitoUI
 
-> **66 componentes React** con estética Neo-Brutalista y toques orgánicos ("Bubbly").
+> Librería de componentes React con estética Neo-Brutalista y toques orgánicos ("Bubbly").
 
 [![npm version](https://img.shields.io/npm/v/maguitoui.svg?style=for-the-badge&color=F18652)](https://www.npmjs.com/package/maguitoui)
 [![npm downloads](https://img.shields.io/npm/dm/maguitoui?style=for-the-badge&color=79BCE8)](https://www.npmjs.com/package/maguitoui)
 [![license](https://img.shields.io/npm/l/maguitoui?style=for-the-badge&color=A2D149)](LICENSE)
 
-Librería de componentes diseñada para que tus proyectos tengan **personalidad propia**. Bordes sólidos, sombras desplazadas, curvas orgánicas y un sistema de temas totalmente personalizable.
+**Documentación oficial:** [ui.maguitostudio.com.ar](https://ui.maguitostudio.com.ar)
 
-<p align="center">
-  <strong>Diseñado con 💜 por <a href="https://github.com/tmaldocena">Maguito Studio</a></strong>
-</p>
+**[🇬🇧 English README](README_eng.md)**
 
 ---
 
-## Instalación
+## Desarrollo Local
+
+### Requisitos
+
+- **Node.js** >= 18
+- **npm** >= 9
+
+### Instalación
 
 ```bash
-npm install maguitoui lucide-react
+npm install
 ```
 
-## Requisitos
+### Estructura del Proyecto
 
-| Dependencia | Versión | Nota |
-|---|---|---|
-| **React** | `>= 18.0.0` | peer dependency |
-| **React DOM** | `>= 18.0.0` | peer dependency |
-| **Tailwind CSS** | `>= 3.0.0` | peer dependency |
-| **Lucide React** | `>= 0.200.0` | peer dependency (iconos) |
+```
+maguito-ui/
+├── components/          # Componentes de la UI de documentación
+│   └── MaguitoUI.tsx    # Fuente de los 66 componentes de la librería
+├── pages/               # Páginas de la documentación (Vite + React)
+├── lib.ts               # Entry point para tsup (exporta todos los componentes)
+├── tailwind-preset.js   # Preset oficial de Tailwind CSS
+├── MaguitoStyles.css    # Variables CSS y estilos globales
+├── types.ts             # Tipos TypeScript compartidos
+└── package.json         # Configuración del paquete npm
+```
 
-## Configuración
+### Comandos
 
-### 1. Tailwind Preset
+| Comando | Descripción |
+|---|---|
+| `npm run dev` | Inicia el servidor de desarrollo (documentación interactiva) |
+| `npm run build:app` | Build de la aplicación de documentación |
+| `npm run build:lib` | Compila la librería con `tsup` (CJS + ESM + DTS) |
+| `npm run preview` | Previsualiza el build de la app |
 
-Agrega el preset oficial a tu `tailwind.config.js`:
+### Publicar en NPM
 
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [
-    require('maguitoui/preset')
-  ],
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/maguitoui/**/*.{js,ts,tsx}",
-  ],
+```bash
+# 1. Build
+npm run build:lib
+
+# 2. Login (si no estás logueado)
+npm login
+
+# 3. Bump de versión
+npm version patch   # 1.1.2 → 1.1.3
+npm version minor   # 1.1.2 → 1.2.0
+npm version major   # 1.1.2 → 2.0.0
+
+# 4. Publicar
+npm publish --access public
+```
+
+> El script `prepublishOnly` corre `build:lib` automáticamente antes de publicar.
+
+## Configuración del Paquete
+
+### `package.json` exports
+
+```json
+{
+  "exports": {
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.mjs",
+      "require": "./dist/lib.js"
+    },
+    "./preset": "./tailwind-preset.js",
+    "./styles": "./MaguitoStyles.css"
+  }
 }
 ```
 
-Esto te da acceso automático a colores (`maguito-orange`, `maguito-blue`, etc.), radios (`rounded-maguito-lg`) y fuentes del sistema de diseño.
+### Build con tsup
 
-### 2. Estilos Globales
-
-Importa las variables CSS en tu punto de entrada (`main.tsx`, `App.tsx`, etc.):
-
-```tsx
-import 'maguitoui/styles';
+```bash
+tsup lib.ts --format cjs,esm --dts --clean --minify --sourcemap
 ```
 
-### 3. ¡Listo!
-
-```tsx
-import { Button, Card, Input, Badge } from 'maguitoui';
-import 'maguitoui/styles';
-
-function MiComponente() {
-  return (
-    <Card className="p-6" shadowColor="orange">
-      <Badge variant="primary">Nuevo</Badge>
-      <h2 className="text-2xl font-bold mt-4">Hola MaguitoUI</h2>
-      <Input label="Email" placeholder="tu@email.com" className="mt-4" />
-      <Button variant="primary" className="mt-4">Enviar</Button>
-    </Card>
-  );
-}
-```
-
-## Variables CSS Personalizables
-
-Puedes sobrescribir las variables de diseño en tu CSS global para adaptar MaguitoUI a tu marca:
-
-```css
-:root {
-  /* Colores */
-  --maguito-primary: #F18652;    /* Naranja principal */
-  --maguito-secondary: #79BCE8;  /* Azul secundario */
-  --maguito-accent: #FDCB63;     /* Amarillo acento */
-  --maguito-bg: #FEFEFC;         /* Fondo */
-  --maguito-text: #2C2C2C;       /* Texto principal */
-  --maguito-danger: #E95B6F;     /* Rojo error */
-  --maguito-success: #A2D149;    /* Verde éxito */
-  --maguito-warning: #FBBF24;    /* Amarillo alerta */
-  --maguito-info: #67E8F9;       /* Cyan info */
-
-  /* Geometría */
-  --maguito-radius-lg: 40px;     /* Radio grande (cards, modales) */
-  --maguito-radius-md: 16px;     /* Radio medio (botones, inputs) */
-  --maguito-radius-sm: 8px;      /* Radio pequeño (badges, chips) */
-
-  /* Trazos y sombras */
-  --maguito-stroke: 3px;         /* Grosor de borde */
-  --maguito-shadow-depth: 6px;   /* Profundidad de sombra desplazada */
-
-  /* Tipografías */
-  --maguito-font-body: 'Plus Jakarta Sans', sans-serif;
-  --maguito-font-display: 'Fredoka', sans-serif;
-}
-```
-
-Cada variable tiene un valor por defecto, así que solo necesitás sobrescribir las que querés cambiar.
-
-## Componentes
-
-### 🎯 Acciones
-`Button` · `FAB` · `Swap` · `Dropdown` · `DropdownItem`
-
-### 📍 Navegación
-`Navbar` · `Dock` · `DockItem` · `Breadcrumbs` · `Pagination` · `Tabs` · `Steps` · `Link`
-
-### 📦 Cards & Layout
-`Card` · `Fieldset` · `Filter` · `Drawer` · `Stack` · `Indicator` · `Artboard`
-
-### 📝 Formularios
-`Input` · `Textarea` · `Checkbox` · `Radio` · `Toggle` · `Select` · `Slider` · `Rating` · `FileInput` · `Label` · `Validator` · `Join` · `Kbd`
-
-### 💬 Feedback
-`Spinner` · `LoadingDots` · `Progress` · `RadialProgress` · `Skeleton` · `Toast` · `Tooltip` · `Alert` · `Badge` · `Status`
-
-### 🎨 Contenido
-`Avatar` · `Divider` · `Stat` · `Table` · `TableHead` · `TableBody` · `TableRow` · `TableHeader` · `TableCell` · `Timeline` · `List` · `ChatBubble` · `Carousel` · `Hero` · `Mask` · `Diff` · `Hover3DCard`
-
-### 🔧 Interactivos
-`Accordion` · `Modal` · `Calendar` · `Countdown` · `ThemeController`
-
-### ⚡ Utilities
-`cn(...classes)` — utilidad para combinar clases condicionales
-
-## Documentación Completa
-
-Explorá los 66 componentes con demos interactivas, código copiable y personalización en tiempo real:
-
-**👉 [Ver documentación oficial](https://ui.maguitostudio.com.ar)**
+Genera:
+- `dist/lib.js` — CommonJS
+- `dist/lib.mjs` — ESM
+- `dist/lib.d.ts` / `dist/lib.d.mts` — TypeScript definitions
 
 ## Temas Incluidos
-
-MaguitoUI viene con 4 presets de temas que podés usar o personalizar:
 
 | Tema | Estilo |
 |---|---|
@@ -153,12 +106,18 @@ MaguitoUI viene con 4 presets de temas que podés usar o personalizar:
 | **Cyber Mage** | Energía neón, vibras futuristas |
 | **Pastel Pixie** | Suavidad máxima para interfaces relajadas |
 
+## Roadmap
+
+- [ ] Componentes adicionales (Toast system, DataTable avanzado)
+- [ ] Mejora en accesibilidad (ARIA labels, focus management)
+- [ ] Más temas predefinidos
+- [ ] Testing con Vitest + Testing Library
+- [ ] Storybook para documentación de componentes
+
 ## Licencia
 
 [MIT License](LICENSE) — Libre para uso personal y comercial.
 
 ---
 
-<p align="center">
-  Diseñado y desarrollado con magia por <strong>Maguito Studio</strong>
-</p>
+Diseñado y desarrollado con 💜 por **Maguito Studio**

@@ -92,6 +92,10 @@ const ThemesDoc: React.FC<ThemesDocProps> = ({
   useGrain,
   onGrainChange
 }) => {
+  useEffect(() => {
+    document.title = 'Themes & Customization — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   const [showExport, setShowExport] = useState(false);
 
   const handleCustomColor = (key: keyof ThemePreset, value: string) => {

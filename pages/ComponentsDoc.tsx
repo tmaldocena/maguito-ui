@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Sparkles, Send, Trash2, Settings, Share2, Star,
   Plus, Github, MessageSquare, AlertCircle, ArrowRight,
@@ -50,7 +50,7 @@ const Showcase = ({ title, description, children, code }: { title: string, descr
         </div>
       </div>
 
-      <Card className="relative overflow-hidden border-4" paddingSize="none" shadowColor="black">
+      <Card className="relative border-4" paddingSize="none" shadowColor="black">
         {view === 'preview' ? (
           <div className="p-8 md:p-12 bg-white/50 min-h-[200px] flex flex-wrap items-center justify-center gap-6">
             {children}
@@ -76,6 +76,10 @@ const Showcase = ({ title, description, children, code }: { title: string, descr
 // --- SECTION: BOTONES ---
 export const ButtonsDoc = () => {
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    document.title = 'Buttons — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   const triggerLoading = () => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 2000);
@@ -139,6 +143,10 @@ export const ButtonsDoc = () => {
 // --- SECTION: INPUTS ---
 export const InputsDoc = () => {
   const [val, setVal] = useState('');
+  useEffect(() => {
+    document.title = 'Inputs & Forms — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   const [check, setCheck] = useState(true);
   const [toggle, setToggle] = useState(true);
   const [radio, setRadio] = useState('a');
@@ -223,6 +231,10 @@ export const InputsDoc = () => {
 
 // --- SECTION: ACCIONES ---
 export const ActionsDoc = () => {
+  useEffect(() => {
+    document.title = 'Actions (FAB, Swap, Dropdown) — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [swapA, setSwapA] = useState(false);
   const [swapB, setSwapB] = useState(true);
@@ -291,6 +303,10 @@ export const ActionsDoc = () => {
 
 // --- SECTION: NAVEGACIÓN ---
 export const NavigationDoc = () => {
+  useEffect(() => {
+    document.title = 'Navigation (Navbar, Breadcrumbs, Tabs) — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   const [activeTab, setActiveTab] = useState('pociones');
   const [currentPage, setCurrentPage] = useState(3);
   const [currentStep, setCurrentStep] = useState(1);
@@ -387,8 +403,13 @@ export const NavigationDoc = () => {
 };
 
 // --- SECTION: CARDS ---
-export const CardsDoc = () => (
-  <div className="space-y-12">
+export const CardsDoc = () => {
+  useEffect(() => {
+    document.title = 'Cards & Layout — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
+  return (
+    <div className="space-y-12">
     <header className="space-y-4">
       <h1 className="text-4xl md:text-8xl font-black text-maguito-black tracking-tighter uppercase italic leading-none">Tarjetas</h1>
       <p className="text-xl md:text-2xl font-bold text-gray-700 max-w-3xl italic">Contenedores con peso visual y carácter único.</p>
@@ -418,11 +439,17 @@ export const CardsDoc = () => (
       </div>
     </Showcase>
   </div>
-);
+  );
+};
 
 // --- SECTION: ALERTS ---
-export const AlertsDoc = () => (
-  <div className="space-y-12">
+export const AlertsDoc = () => {
+  useEffect(() => {
+    document.title = 'Alerts — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
+  return (
+    <div className="space-y-12">
     <header className="space-y-4">
       <h1 className="text-4xl md:text-8xl font-black text-maguito-black tracking-tighter uppercase italic leading-none">Alertas</h1>
       <p className="text-xl md:text-2xl font-bold text-gray-700 max-w-3xl italic">Comunica eventos importantes con señales visuales inmediatas.</p>
@@ -441,12 +468,17 @@ export const AlertsDoc = () => (
       </div>
     </Showcase>
   </div>
-);
+  );
+};
 
 // --- SECTION: FEEDBACK ---
 export const FeedbackDoc = () => {
   const [showToast, setShowToast] = useState(false);
   const [progress, setProgress] = useState(65);
+  useEffect(() => {
+    document.title = 'Feedback (Toast, Progress, Skeleton) — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
 
   return (
     <div className="space-y-12">
@@ -530,8 +562,13 @@ export const FeedbackDoc = () => {
 };
 
 // --- SECTION: LAYOUT ---
-export const LayoutDoc = () => (
-  <div className="space-y-12">
+export const LayoutDoc = () => {
+  useEffect(() => {
+    document.title = 'Layout (Stack, Drawer, Stack) — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
+  return (
+    <div className="space-y-12">
     <header className="space-y-4">
       <h1 className="text-4xl md:text-8xl font-black text-maguito-black tracking-tighter uppercase italic leading-none">Layout</h1>
       <p className="text-xl md:text-2xl font-bold text-gray-700 max-w-3xl italic">Organiza el contenido con contenedores y estructuras neo-brutalistas.</p>
@@ -602,10 +639,15 @@ export const LayoutDoc = () => (
       </div>
     </Showcase>
   </div>
-);
+  );
+};
 
 // --- SECTION: CONTENT ---
 export const ContentDoc = () => {
+  useEffect(() => {
+    document.title = 'Content (Avatar, Table, Timeline, Carousel) — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
   return (
     <div className="space-y-12">
       <header className="space-y-4">
@@ -770,6 +812,11 @@ export const ContentDoc = () => {
 export const InteractiveDoc = () => {
   const [theme, setTheme] = useState(0);
   const [countdown, setCountdown] = useState(10);
+  const [countdownKey, setCountdownKey] = useState(0);
+  useEffect(() => {
+    document.title = 'Interactive (Modal, Accordion, Calendar) — MaguitoUI | React Component Library';
+    return () => { document.title = 'MaguitoUI — Bold React Component Library | Neo-Brutalist Design System'; };
+  }, []);
 
   return (
     <div className="space-y-12">
@@ -800,8 +847,8 @@ export const InteractiveDoc = () => {
         code={`<Countdown seconds={60} onComplete={() => alert('¡Tiempo!')} />`}
       >
         <div className="text-center">
-          <Countdown seconds={countdown} onComplete={() => alert('¡Tiempo terminado!')} />
-          <Button onClick={() => setCountdown(10)} variant="outline" className="mt-4">Reiniciar</Button>
+          <Countdown key={countdownKey} seconds={countdown} onComplete={() => alert('¡Tiempo terminado!')} />
+          <Button onClick={() => { setCountdown(10); setCountdownKey(k => k + 1); }} variant="outline" className="mt-4">Reiniciar</Button>
         </div>
       </Showcase>
 
@@ -827,12 +874,12 @@ export const InteractiveDoc = () => {
       >
         <div className="flex flex-col gap-4">
           <Join>
-            <Input placeholder="tu@email.com" className="rounded-r-none" />
-            <Button className="rounded-l-none">Suscribir</Button>
+            <Input placeholder="tu@email.com" />
+            <Button>Suscribir</Button>
           </Join>
           <Join orientation="vertical">
-            <Button variant="primary" className="rounded-b-none">Opción 1</Button>
-            <Button variant="secondary" className="rounded-t-none">Opción 2</Button>
+            <Button variant="primary">Opción 1</Button>
+            <Button variant="secondary">Opción 2</Button>
           </Join>
         </div>
       </Showcase>
