@@ -1,0 +1,24 @@
+# Source code (only dist is published)
+src/
+components/
+pages/
+App.tsx
+index.tsx
+lib.ts
+types.ts
+
+# Dev config
+vite.config.ts
+tsconfig.json
+tailwind-preset.js
+
+# Dev tools
+node_modules/
+.vscode/
+.idea/
+
+# Misc
+*.md
+!README.md
+*.log
+.DS_Store

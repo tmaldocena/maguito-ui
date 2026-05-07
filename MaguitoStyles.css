@@ -1,0 +1,38 @@
+
+:root {
+  /* Alquimia por defecto */
+  --maguito-primary: #F18652;
+  --maguito-secondary: #79BCE8;
+  --maguito-accent: #FDCB63;
+  --maguito-bg: #FEFEFC;
+  --maguito-text: #2C2C2C;
+  --maguito-danger: #E95B6F;
+  --maguito-success: #A2D149;
+  --maguito-warning: #FBBF24;
+  --maguito-info: #67E8F9;
+
+  --maguito-radius-lg: 40px;
+  --maguito-radius-md: 16px;
+  --maguito-radius-sm: 8px;
+  
+  --maguito-stroke: 3px;
+  --maguito-shadow-depth: 6px;
+  --maguito-muted: #6B7280;
+  
+  --maguito-font-body: 'Plus Jakarta Sans', sans-serif;
+  --maguito-font-display: 'Fredoka', sans-serif;
+}
+
+.border-maguito { 
+  border-width: var(--maguito-stroke); 
+  border-style: solid; 
+  border-color: var(--maguito-text); 
+}
+
+.shadow-maguito { 
+  box-shadow: var(--maguito-shadow-depth) var(--maguito-shadow-depth) 0px 0px var(--maguito-text); 
+}
+
+.shadow-maguito-lg { 
+  box-shadow: calc(var(--maguito-shadow-depth) * 1.5) calc(var(--maguito-shadow-depth) * 1.5) 0px 0px var(--maguito-text); 
+}

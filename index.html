@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaguitoUI - Neo-Brutalismo Mágico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme Colors */
+            --maguito-primary: #F18652;
+            --maguito-secondary: #79BCE8;
+            --maguito-accent: #FDCB63;
+            --maguito-bg: #FEFEFC;
+            --maguito-text: #2C2C2C;
+            --maguito-danger: #E95B6F;
+            --maguito-success: #A2D149;
+            --maguito-warning: #FBBF24;
+            --maguito-info: #67E8F9;
+
+            /* Geometry */
+            --maguito-radius-lg: 40px;
+            --maguito-radius-md: 16px;
+            --maguito-radius-sm: 8px;
+            
+            /* Alchemy Variables */
+            --maguito-stroke: 3px;
+            --maguito-shadow-depth: 6px;
+            --maguito-muted: #6B7280;
+            
+            /* Dual Font System */
+            --maguito-font-body: 'Plus Jakarta Sans', sans-serif;
+            --maguito-font-display: 'Fredoka', sans-serif;
+        }
+
+        body {
+            font-family: var(--maguito-font-body);
+            background-color: var(--maguito-bg);
+            color: var(--maguito-text);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Branding Display Rules with Refined Weights */
+        h1, h2, h3, h4, .font-display {
+            font-family: var(--maguito-font-display);
+            letter-spacing: 0.02em;
+        }
+
+        h1, h2 {
+            font-weight: 600; /* SemiBold for major impact */
+        }
+
+        h3, h4, .font-display {
+            font-weight: 500; /* Medium for sub-headers and secondary branding */
+        }
+
+        /* Texture Overlay Effect */
+        .maguito-grain::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            filter: contrast(120%) brightness(100%);
+        }
+
+        *, *::before, *::after {
+            transition: border-color 0.4s ease, background-color 0.4s ease, border-radius 0.3s ease, border-width 0.2s ease;
+        }
+
+        .border-maguito { border-width: var(--maguito-stroke); border-style: solid; border-color: var(--maguito-text); }
+        .shadow-maguito { box-shadow: var(--maguito-shadow-depth) var(--maguito-shadow-depth) 0px 0px var(--maguito-text); }
+        .shadow-maguito-lg { box-shadow: calc(var(--maguito-shadow-depth) * 1.5) calc(var(--maguito-shadow-depth) * 1.5) 0px 0px var(--maguito-text); }
+        
+        /* Muted text adaptation */
+        .text-muted { color: var(--maguito-muted); }
+        
+        /* Dark theme text overrides */
+        .dark-text-gray .text-gray-600, .dark-text-gray .text-gray-500, .dark-text-gray .text-gray-700 {
+            color: var(--maguito-muted) !important;
+        }
+        .dark-text-gray .text-gray-400 {
+            color: #9CA3AF !important;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--maguito-bg); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--maguito-text);
+            border-radius: 10px;
+            border: 2px solid var(--maguito-bg);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maguito: {
+                            orange: 'var(--maguito-primary)',
+                            blue: 'var(--maguito-secondary)',
+                            yellow: 'var(--maguito-accent)',
+                            red: 'var(--maguito-danger)',
+                            black: 'var(--maguito-text)',
+                            white: 'var(--maguito-bg)',
+                            green: 'var(--maguito-success)',
+                            cyan: 'var(--maguito-info)',
+                            amber: 'var(--maguito-warning)'
+                        }
+                    },
+                    borderRadius: {
+                        'maguito-lg': 'var(--maguito-radius-lg)',
+                        'maguito-md': 'var(--maguito-radius-md)',
+                        'maguito-sm': 'var(--maguito-radius-sm)',
+                    },
+                    fontFamily: {
+                        sans: ['var(--maguito-font-body)', 'sans-serif'],
+                        display: ['var(--maguito-font-display)', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

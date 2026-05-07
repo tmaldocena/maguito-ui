@@ -1,0 +1,52 @@
+{
+  "name": "maguitoui",
+  "version": "1.1.1",
+  "description": "Librería de componentes Neo-Brutalistas diseñada por Maguito Studio.",
+  "main": "./dist/lib.js",
+  "module": "./dist/lib.mjs",
+  "types": "./dist/lib.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.mjs",
+      "require": "./dist/lib.js"
+    },
+    "./preset": "./tailwind-preset.js",
+    "./styles": "./MaguitoStyles.css"
+  },
+  "files": [
+    "dist",
+    "tailwind-preset.js",
+    "MaguitoStyles.css",
+    "README.md",
+    "types.ts"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build:app": "vite build",
+    "build:lib": "tsup lib.ts --format cjs,esm --dts --clean --minify --sourcemap",
+    "prepublishOnly": "npm run build:lib",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  },
+  "peerDependencies": {
+    "lucide-react": "^1.8.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "tailwindcss": ">=3.0.0"
+  },
+  "author": "Maguito Studio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maguito-studio/maguitoui"
+  }
+}
