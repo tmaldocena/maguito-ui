@@ -48,5 +48,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tmaldocena/maguito-ui"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.15.0"
   }
 }
