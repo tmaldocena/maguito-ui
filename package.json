@@ -1,6 +1,6 @@
 {
   "name": "maguitoui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Librería de componentes Neo-Brutalistas diseñada por Maguito Studio.",
   "main": "./dist/lib.js",
   "module": "./dist/lib.mjs",
